@@ -1,0 +1,23 @@
+.Header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--prussian-blue);
+    padding-inline: 3rem;
+    padding-block: 1rem;
+}
+
+.Header nav ul {
+    display: flex;
+    gap: 2rem;
+}
+
+.Header nav ul li {
+    list-style: none;
+}
+
+.Header nav ul li a {
+    font-size: 1.5rem;
+    font-family: sans-serif;
+    color: var(--flame);
+}
