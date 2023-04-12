@@ -21,3 +21,10 @@
     font-family: sans-serif;
     color: var(--flame);
 }
+
+
+.HomeGrid {
+    display: grid;
+    grid-template-columns: repeat(9,1fr );
+    
+}

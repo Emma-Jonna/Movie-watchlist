@@ -11,10 +11,9 @@ function App() {
   const [count, setCount] = useState(0);
 
   return (
-      <div>
+      <>
           <Header />
           <main>
-
               <Routes>
                   <Route path="/" element={<Home />} />
                   <Route path="/Movie" element={<Movie />} />
@@ -22,7 +21,7 @@ function App() {
                   <Route path="/Login" element={<Login />}/>
               </Routes>
           </main>
-      </div>
+      </>
   )
 }
 
