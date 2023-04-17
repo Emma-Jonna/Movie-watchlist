@@ -5,6 +5,7 @@
     background-color: var(--prussian-blue);
     padding-inline: 3rem;
     padding-block: 1rem;
+    margin-bottom: 3rem;
 }
 
 .Header nav ul {
@@ -20,4 +21,22 @@
     font-size: 1.5rem;
     font-family: sans-serif;
     color: var(--flame);
+}
+
+
+.HomeGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 185px);
+    justify-content: center;
+    column-gap: 1.5rem;
+    row-gap: 2.5rem;
+}
+
+.filmCard {
+    display: flex;
+    flex-direction: column;
+}
+
+.filmCard h2 {
+    font-family: "IBM Plex Sans";
 }
