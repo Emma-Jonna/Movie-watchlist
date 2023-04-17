@@ -5,9 +5,8 @@ import { FilmCard } from "../commponents/filmCard";
 
 function Home () {
     const [Films, setFilms] = useState([])
-    
-    useEffect(() => {
-        const films = async () => {
+
+    const films = async () => {
         const url = `https://api.themoviedb.org/3/movie/top_rated?api_key=377726bdb2fe4f22ae2b437d8ee6f0dd`;
         
         const res = await fetch(url);
@@ -15,8 +14,10 @@ function Home () {
         
         setFilms(respond.results);
     }
-    films()
-    },[])
+    
+    useEffect(() => {   
+        films()
+    }, [Films])
     
     return (
         <div className={styles.HomeGrid}>
