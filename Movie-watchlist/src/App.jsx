@@ -1,4 +1,3 @@
-import {useState} from "react";
 import "./App.css";
 import {Route, Routes} from "react-router-dom";
 import Header from "./commponents/header.jsx";
@@ -8,7 +7,6 @@ import Movie from "./Pages/Movie.jsx";
 import Profil from "./Pages/Profil.jsx";
 
 function App() {
-  const [count, setCount] = useState(0);
 
   return (
     <div>
@@ -16,7 +14,7 @@ function App() {
       <main>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/movie" element={<Movie />} />
+          <Route path="/movie/:id" element={<Movie />} />
           <Route path="/profil" element={<Profil />} />
           <Route path="/login" element={<Login />} />
         </Routes>
