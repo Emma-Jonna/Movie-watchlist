@@ -32,11 +32,43 @@
     row-gap: 2.5rem;
 }
 
+/* Film card */
 .filmCard {
     display: flex;
     flex-direction: column;
+
+    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.15);
+    border-radius: .25rem;
+    overflow: hidden;
 }
 
-.filmCard h2 {
+.filmCard .filmCardContiner {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+
+    padding: .5rem .8rem;
+}
+
+.filmCard .filmCardContiner h2 {
     font-family: "IBM Plex Sans";
+}
+
+.filmCard .filmCardContiner .rating {
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.3rem;
+}
+
+
+/* Button */
+.btn {
+    display: flex;
+    justify-content: center;
+    font-family: "IBM Plex Sans";
+    font-size: 1.2rem;
+    color: var(--floral-white);
+    background-color: var(--viridian);
+    padding-block: .7em;
+    border-radius: .25em;
 }
