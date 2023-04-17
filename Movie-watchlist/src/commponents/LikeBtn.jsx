@@ -8,9 +8,7 @@ export function LikeBtn({ Like }) {
     function clickLike() {
         setLike(!like);
     }
-    
-    /*  */
-    Like ? setLike(true) : setLike(false);
+
 
     return <FontAwesomeIcon onClick={clickLike} icon={faHeart}  color={like ? "var(--flame)" : "var(--prussian-blue)"} />
 }
