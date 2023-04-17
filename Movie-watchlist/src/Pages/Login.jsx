@@ -5,14 +5,9 @@ function Login() {
   const [requestToken, setrequestToken] = useState("");
 
   if (window.sessionStorage.getItem("requestToken")) {
-    console.log(window.sessionStorage.getItem("requestToken"));
-
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json;charset=utf-8");
-    myHeaders.append(
-      "Authorization",
-      "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI2ZGZmYTMwYjFjMWY2YzIzMWZkZDY2MDFjNjAxYWRkZiIsInN1YiI6IjY0MmQzOTk1NjQ3NjU0MDBkM2NhMGUyNSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.DCq2hAOkHMO8FVFuCfDvr5gsHTjZ9QJV-a8h-u_2Pu4"
-    );
+    myHeaders.append("Authorization", `Bearer ${import.meta.env.VITE_TMDBv4}`);
 
     var raw = `{"request_token": "${window.sessionStorage.getItem(
       "requestToken"
@@ -36,11 +31,7 @@ function Login() {
   useEffect(() => {
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json;charset=utf-8");
-    myHeaders.append(
-      "Authorization",
-      // `Bearer ${process.env.TMDBv4}`
-      "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI2ZGZmYTMwYjFjMWY2YzIzMWZkZDY2MDFjNjAxYWRkZiIsInN1YiI6IjY0MmQzOTk1NjQ3NjU0MDBkM2NhMGUyNSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.DCq2hAOkHMO8FVFuCfDvr5gsHTjZ9QJV-a8h-u_2Pu4"
-    );
+    myHeaders.append("Authorization", `Bearer ${import.meta.env.VITE_TMDBv4}`);
 
     var raw = '{\r\n  "redirect_to": "http://127.0.0.1:5173/login"\r\n}';
 
@@ -65,6 +56,32 @@ function Login() {
   };
 
   if (window.sessionStorage.getItem("accessToken")) {
+    var myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+
+    var raw = JSON.stringify({
+      access_token: `${window.sessionStorage.getItem("accessToken")}`,
+    });
+
+    var requestOptions = {
+      method: "POST",
+      headers: myHeaders,
+      body: raw,
+      redirect: "follow",
+    };
+
+    fetch(
+      `https://api.themoviedb.org/3/authentication/session/convert/4?api_key=${
+        import.meta.env.VITE_TMDBv3
+      }`,
+      requestOptions
+    )
+      .then((response) => response.json())
+      .then((result) => {
+        window.sessionStorage.setItem("session_id", result.session_id);
+      })
+      .catch((error) => console.log("error", error));
+
     return <Navigate to="/" />;
   }
 
