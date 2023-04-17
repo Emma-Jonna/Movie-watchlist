@@ -7,7 +7,7 @@ function Home () {
     const [Films, setFilms] = useState([])
 
     const films = async () => {
-        const url = `https://api.themoviedb.org/3/movie/top_rated?api_key=377726bdb2fe4f22ae2b437d8ee6f0dd`;
+        const url = `https://api.themoviedb.org/3/movie/top_rated?api_key=${import.meta.env.VITE_TMDBv3}`;
         
         const res = await fetch(url);
         const respond = await res.json();

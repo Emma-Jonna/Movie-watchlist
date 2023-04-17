@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faUser} from "@fortawesome/free-solid-svg-icons";
 
@@ -8,8 +10,8 @@ function Header () {
         <img src="https://picsum.photos/60" alt="" />
         <nav>
             <ul>
-                <li><a href="/">Home</a></li>
-                <li><a href="/Profil"><FontAwesomeIcon icon={faUser} size={"1x"} /></a></li>
+                <li><Link to="/">Home</Link></li>
+                <li><Link to="/Profil"><FontAwesomeIcon icon={faUser} size={"1x"} /></Link></li>
             </ul>
         </nav>
     </header>
