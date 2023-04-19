@@ -72,3 +72,12 @@
     padding-block: .7em;
     border-radius: .25em;
 }
+.signout {
+    font-size: 1.5rem;
+    font-family: sans-serif;
+    color: var(--flame);
+    background-color: transparent;
+    border: none;
+
+    cursor: pointer;
+}
