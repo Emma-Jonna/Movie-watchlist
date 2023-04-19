@@ -33,7 +33,7 @@ function Login() {
     myHeaders.append("Content-Type", "application/json;charset=utf-8");
     myHeaders.append("Authorization", `Bearer ${import.meta.env.VITE_TMDBv4}`);
 
-    var raw = '{\r\n  "redirect_to": "http://localhost:5173/login"\r\n}';
+    var raw = '{\r\n  "redirect_to": "http://127.0.0.1:5173/login"\r\n}';
 
     var requestOptions = {
       method: "POST",

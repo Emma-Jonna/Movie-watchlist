@@ -4,10 +4,9 @@ import Header from "./commponents/header.jsx";
 import Home from "./Pages/Home.jsx";
 import Login from "./Pages/Login.jsx";
 import Movie from "./Pages/Movie.jsx";
-import Profil from "./Pages/Profil.jsx";
+import Profile from "./Pages/Profile.jsx";
 
 function App() {
-
   return (
     <div>
       <Header />
@@ -15,7 +14,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/movie/:id" element={<Movie />} />
-          <Route path="/profil" element={<Profil />} />
+          <Route path="/profile" element={<Profile />} />
           <Route path="/login" element={<Login />} />
         </Routes>
       </main>
