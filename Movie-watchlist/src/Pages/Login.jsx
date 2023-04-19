@@ -4,30 +4,6 @@ import {json, Navigate} from "react-router-dom";
 function Login() {
   const [requestToken, setrequestToken] = useState("");
 
-  if (window.sessionStorage.getItem("requestToken")) {
-    var myHeaders = new Headers();
-    myHeaders.append("Content-Type", "application/json;charset=utf-8");
-    myHeaders.append("Authorization", `Bearer ${import.meta.env.VITE_TMDBv4}`);
-
-    var raw = `{"request_token": "${window.sessionStorage.getItem(
-      "requestToken"
-    )}"}`;
-
-    var requestOptions = {
-      method: "POST",
-      headers: myHeaders,
-      body: raw,
-      redirect: "follow",
-    };
-
-    fetch("https://api.themoviedb.org/4/auth/access_token", requestOptions)
-      .then((response) => response.json())
-      .then((result) => {
-        window.sessionStorage.setItem("accessToken", result.access_token);
-      })
-      .catch((error) => console.log("error", error));
-  }
-
   useEffect(() => {
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json;charset=utf-8");
@@ -55,7 +31,38 @@ function Login() {
     window.location.href = `https://www.themoviedb.org/auth/access?request_token=${requestToken}`;
   };
 
-  if (window.sessionStorage.getItem("accessToken")) {
+  if (window.sessionStorage.getItem("session_id")) {
+    return <Navigate to="/" />;
+  } else if (
+    window.sessionStorage.getItem("requestToken") &&
+    !window.sessionStorage.getItem("accessToken") &&
+    !window.sessionStorage.getItem("session_id")
+  ) {
+    var myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json;charset=utf-8");
+    myHeaders.append("Authorization", `Bearer ${import.meta.env.VITE_TMDBv4}`);
+
+    var raw = `{"request_token": "${window.sessionStorage.getItem(
+      "requestToken"
+    )}"}`;
+
+    var requestOptions = {
+      method: "POST",
+      headers: myHeaders,
+      body: raw,
+      redirect: "follow",
+    };
+
+    fetch("https://api.themoviedb.org/4/auth/access_token", requestOptions)
+      .then((response) => response.json())
+      .then((result) => {
+        window.sessionStorage.setItem("accessToken", result.access_token);
+      })
+      .catch((error) => console.log("error", error));
+  } else if (
+    window.sessionStorage.getItem("accessToken") &&
+    !window.sessionStorage.getItem("session_id")
+  ) {
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
 
@@ -81,7 +88,6 @@ function Login() {
         window.sessionStorage.setItem("session_id", result.session_id);
       })
       .catch((error) => console.log("error", error));
-
     return <Navigate to="/" />;
   }
 
