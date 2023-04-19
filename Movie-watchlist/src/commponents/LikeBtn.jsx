@@ -1,9 +1,13 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export function LikeBtn({ FilmId, Like }) {
-    const [like, setLike] = useState(Like);
+    const [like, setLike] = useState();
+
+    useEffect(() => {
+        setLike(Like);
+    }, [Like])
     
     const addFavorit = async () => {
         const session_id = window.sessionStorage.getItem("session_id");
@@ -31,8 +35,7 @@ export function LikeBtn({ FilmId, Like }) {
 
         return await res.json()
     }
-    async function clickLike() {
-        console.log(Like);
+    function clickLike() {
         addFavorit().then(() => {
             setLike(!like);
         }).catch(e => {
