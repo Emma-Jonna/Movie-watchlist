@@ -9,9 +9,9 @@ import { useEffect, useState } from "react";
 export function FilmCard({poster_path, title, id, vote_average}) {
 
   let [ Like, setLike ] = useState(false)
+  const session_id = window.sessionStorage.getItem("session_id");
 
   async function getLike() {
-    const session_id = window.sessionStorage.getItem("session_id");
           
     const urlFavorite = `https://api.themoviedb.org/3/account/{account_id}/watchlist/movies?api_key=${import.meta.env.VITE_TMDBv3}&session_id=${session_id}`;
 
@@ -30,11 +30,14 @@ export function FilmCard({poster_path, title, id, vote_average}) {
   }
 
   useEffect(() => {
-    getLike()
-      .then(res => {
-        setLike(res);
-      })
-      .catch(e => console.error(e));
+
+    if (session_id) {
+      getLike()
+        .then(res => {
+          setLike(res);
+        })
+        .catch(e => console.error(e));
+    }
   }, []) 
 
   return (

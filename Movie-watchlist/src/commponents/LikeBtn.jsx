@@ -9,8 +9,9 @@ export function LikeBtn({ FilmId, Like }) {
         setLike(Like);
     }, [Like])
     
+    const session_id = window.sessionStorage.getItem("session_id");
+    
     const addFavorit = async () => {
-        const session_id = window.sessionStorage.getItem("session_id");
 
         if (!session_id) {
             return;
@@ -36,11 +37,13 @@ export function LikeBtn({ FilmId, Like }) {
         return await res.json()
     }
     function clickLike() {
-        addFavorit().then(() => {
-            setLike(!like);
-        }).catch(e => {
-            console.error(e);
-        })
+        if (session_id) {
+            addFavorit().then(() => {
+                setLike(!like);
+            }).catch(e => {
+                console.error(e);
+            })
+        }
     }
 
 
