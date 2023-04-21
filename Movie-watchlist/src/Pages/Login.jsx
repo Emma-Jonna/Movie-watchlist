@@ -5,30 +5,89 @@ function Login() {
   const [requestToken, setrequestToken] = useState("");
 
   useEffect(() => {
-    var myHeaders = new Headers();
-    myHeaders.append("Content-Type", "application/json;charset=utf-8");
-    myHeaders.append("Authorization", `Bearer ${import.meta.env.VITE_TMDBv4}`);
+    getRequestToken();
+  }, []);
 
-    var raw = '{\r\n  "redirect_to": "http://localhost:5173/login"\r\n}';
-
-    var requestOptions = {
+  const getRequestToken = async () => {
+    const requestOptions = {
       method: "POST",
-      headers: myHeaders,
-      body: raw,
+      headers: {
+        Authorization: `Bearer ${import.meta.env.VITE_TMDBv4}`,
+        "Content-Type": "application/json;charset=utf-8",
+      },
+      body: '{\r\n  "redirect_to": "http://localhost:5173/login"\r\n}',
       redirect: "follow",
     };
 
-    fetch("https://api.themoviedb.org/4/auth/request_token", requestOptions)
-      .then((response) => response.json())
-      .then((result) => {
-        setrequestToken(result.request_token);
-      })
-      .catch((error) => console.log("error", error));
-  }, []);
+    try {
+      const response = await fetch(
+        "https://api.themoviedb.org/4/auth/request_token",
+        requestOptions
+      );
 
-  let generateAccessToken = () => {
+      const requestToken = await response.json();
+
+      setrequestToken(requestToken.request_token);
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
+  const AcceptRequestToken = () => {
     window.sessionStorage.setItem("requestToken", requestToken);
     window.location.href = `https://www.themoviedb.org/auth/access?request_token=${requestToken}`;
+  };
+
+  const getAccessToken = async () => {
+    const requestOptions = {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${import.meta.env.VITE_TMDBv4}`,
+        "Content-Type": "application/json;charset=utf-8",
+      },
+      body: `{"request_token": "${window.sessionStorage.getItem(
+        "requestToken"
+      )}"}`,
+      redirect: "follow",
+    };
+
+    try {
+      const response = await fetch(
+        "https://api.themoviedb.org/4/auth/access_token",
+        requestOptions
+      );
+
+      const accessToken = await response.json();
+
+      window.sessionStorage.setItem("accessToken", accessToken.access_token);
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
+  const getSessionId = async () => {
+    const requestOptions = {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify({
+        access_token: `${window.sessionStorage.getItem("accessToken")}`,
+      }),
+      redirect: "follow",
+    };
+
+    try {
+      const response = await fetch(
+        `https://api.themoviedb.org/3/authentication/session/convert/4?api_key=${
+          import.meta.env.VITE_TMDBv3
+        }`,
+        requestOptions
+      );
+
+      const sessionId = await response.json();
+      window.sessionStorage.setItem("session_id", sessionId.session_id);
+    } catch (e) {
+      console.error(e);
+    }
   };
 
   if (window.sessionStorage.getItem("session_id")) {
@@ -38,63 +97,19 @@ function Login() {
     !window.sessionStorage.getItem("accessToken") &&
     !window.sessionStorage.getItem("session_id")
   ) {
-    var myHeaders = new Headers();
-    myHeaders.append("Content-Type", "application/json;charset=utf-8");
-    myHeaders.append("Authorization", `Bearer ${import.meta.env.VITE_TMDBv4}`);
-
-    var raw = `{"request_token": "${window.sessionStorage.getItem(
-      "requestToken"
-    )}"}`;
-
-    var requestOptions = {
-      method: "POST",
-      headers: myHeaders,
-      body: raw,
-      redirect: "follow",
-    };
-
-    fetch("https://api.themoviedb.org/4/auth/access_token", requestOptions)
-      .then((response) => response.json())
-      .then((result) => {
-        window.sessionStorage.setItem("accessToken", result.access_token);
-      })
-      .catch((error) => console.log("error", error));
+    getAccessToken();
   } else if (
     window.sessionStorage.getItem("accessToken") &&
     !window.sessionStorage.getItem("session_id")
   ) {
-    var myHeaders = new Headers();
-    myHeaders.append("Content-Type", "application/json");
-
-    var raw = JSON.stringify({
-      access_token: `${window.sessionStorage.getItem("accessToken")}`,
-    });
-
-    var requestOptions = {
-      method: "POST",
-      headers: myHeaders,
-      body: raw,
-      redirect: "follow",
-    };
-
-    fetch(
-      `https://api.themoviedb.org/3/authentication/session/convert/4?api_key=${
-        import.meta.env.VITE_TMDBv3
-      }`,
-      requestOptions
-    )
-      .then((response) => response.json())
-      .then((result) => {
-        window.sessionStorage.setItem("session_id", result.session_id);
-      })
-      .catch((error) => console.log("error", error));
+    getSessionId();
     return <Navigate to="/" />;
   }
 
   return (
     <div>
       <h1>Login Works</h1>
-      <button onClick={generateAccessToken}>Login</button>
+      <button onClick={AcceptRequestToken}>Login</button>
     </div>
   );
 }
