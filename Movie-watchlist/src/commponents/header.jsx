@@ -9,36 +9,34 @@ import {useEffect, useState} from "react";
 function Header() {
   const [Login, setLogin] = useState(false);
 
-  const session_id = window.sessionStorage.getItem("session_id");
-  const access_token = window.sessionStorage.getItem("accessToken");
+    let session_id = window.sessionStorage.getItem('session_id');
+    const access_token = window.sessionStorage.getItem('accessToken');
+    
+    
+    useEffect(() => {
+        console.log(!session_id);
+        setLogin(false)
+        if (!session_id) {
+            setLogin(true)
+        }
+    }, [session_id])
 
-  // console.log(session_id);
+    function handelLogUt() {
+        const headers = new Headers();
+        headers.append("Content-Type", "application/json;charset=utf-8");
+        headers.append("Authorization", `Bearer ${import.meta.env.VITE_TMDBv4}`);
 
-  useEffect(() => {
-    if (!session_id) {
-      setLogin(true);
+        const body = JSON.stringify({ access_token })
+
+        /* Fetch */
+        fetch('https://api.themoviedb.org/4/auth/access_token', { headers, body, method: "DELETE" })
+            .then(res => res.json())
+            .then(() => {
+            })
+            .catch(e => console.error(e));
+            window.sessionStorage.clear();
+            session_id = null;
     }
-  });
-
-  const handelLoginBtn = async () => {
-    const url = "https://api.themoviedb.org/4/auth/access_token";
-
-    const headers = new Headers();
-    headers.append("Content-Type", "application/json");
-    headers.append("Authorization", `Bearer ${import.meta.env.VITE_TMDBv4}`);
-
-    const body = JSON.stringify({
-      access_token,
-    });
-    const request = await fetch(url, {method: "DELETE", body, headers});
-
-    if (!request.ok) {
-      throw Error("You are trying to log out when you are not logged in");
-    }
-    await request.json();
-    window.sessionStorage.clear();
-    setLogin(false);
-  };
 
   return (
     <header className={styles.Header}>
@@ -55,7 +53,7 @@ function Header() {
           )}
           {!Login && (
             <li>
-              <button className={styles.signout} onClick={handelLoginBtn}>
+              <button className={styles.signout} onClick={handelLogUt}>
                 Logga ut
               </button>
             </li>

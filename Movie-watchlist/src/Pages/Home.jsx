@@ -19,7 +19,7 @@ function Home () {
         }
         setFilms(respondFilms.results);
     }
-
+    
     const filter = () => {
         films()
     }

@@ -4,6 +4,7 @@ import {FilmCard} from "../commponents/filmCard";
 
 function Profile() {
   const [MovieList, setMovieList] = useState([]);
+  
 
   useEffect(() => {
     var requestOptions = {
