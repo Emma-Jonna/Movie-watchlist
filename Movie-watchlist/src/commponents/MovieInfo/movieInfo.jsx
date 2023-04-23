@@ -13,9 +13,9 @@ function MovieInfo(props) {
         alt=""
       />
       <p>{props.releaseDate}</p>
-      {/* <p>{props.runtime / 60}</p> */}
+      <p>{Math.round((props.runtime / 60) * 10) / 10}</p>
       <p>{props.runtime}</p>
-      <p>{props.averageScore}</p>
+      <p>{Math.round(props.averageScore * 10) / 10}/10</p>
     </div>
   );
 }

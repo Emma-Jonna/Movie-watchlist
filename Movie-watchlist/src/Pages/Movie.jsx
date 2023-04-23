@@ -36,7 +36,7 @@ function Movie() {
 
   console.log(Movie);
 
-  return (
+  return !Movie.poster_path ? null : (
     <div>
       <MovieInfo
         title={Movie.title}
