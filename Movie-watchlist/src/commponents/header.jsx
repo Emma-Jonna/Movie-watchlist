@@ -65,11 +65,11 @@ function Header() {
               </button>
             </li>
           )}
-          <li>
+          {!Login && (<li>
             <Link to="/profile">
               <FontAwesomeIcon icon={faUser} size={"1x"} />
             </Link>
-          </li>
+          </li>)}
         </ul>
       </nav>
     </header>
