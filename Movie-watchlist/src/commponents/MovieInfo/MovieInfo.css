@@ -1,0 +1,92 @@
+.movie-card {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 30px;
+}
+
+.movie-card-poster {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.movie-card-text {
+  width: 100%;
+  padding: 0;
+}
+
+.movie-card-text > h2 {
+  font-family: "IBM Plex Sans";
+  margin: 0;
+  font-size: 2rem;
+}
+
+.movie-card-text p {
+  font-family: "Lora";
+}
+
+.movie-card-text p:not(.movie-card-text p:last-child) {
+  font-size: 0.8rem;
+}
+
+.movie-card-text p:last-child {
+  font-size: 1rem;
+}
+
+article {
+  padding: 0 20px;
+}
+
+@media (min-width: 768px) {
+  .movie-card {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    width: 100%;
+  }
+
+  .movie-card-poster {
+    width: 30%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .movie-card-text {
+    width: 70%;
+  }
+
+  article {
+    padding: 0 40px 0 0;
+  }
+
+  .movie-card-text > h2 {
+    font-size: 2.2rem;
+  }
+
+  .movie-card-text p:not(.movie-card-text p:last-child) {
+    font-size: 0.9rem;
+  }
+
+  .movie-card-text p:last-child {
+    font-size: 1.2rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  article {
+    padding: 0 60px 0 0;
+  }
+
+  .movie-card-text > h2 {
+    font-size: 2.5rem;
+  }
+
+  .movie-card-text p:not(.movie-card-text p:last-child) {
+    font-size: 1rem;
+  }
+
+  .movie-card-text p:last-child {
+    font-size: 1.3rem;
+  }
+}

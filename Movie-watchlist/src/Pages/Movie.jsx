@@ -4,9 +4,9 @@ import MovieInfo from "../commponents/MovieInfo";
 
 function Movie() {
   const {id} = useParams();
-  // console.log(id);
 
-  const [Movie, setMovie] = useState([]);
+  const [MovieCard, setMovie] = useState([]);
+  const [Genres, setGenres] = useState([]);
 
   const getMovie = async () => {
     const requestOptions = {
@@ -25,6 +25,9 @@ function Movie() {
       const movieInfo = await response.json();
 
       setMovie(movieInfo);
+      setGenres(movieInfo.genres);
+
+      return;
     } catch (e) {
       console.error(e);
     }
@@ -32,24 +35,29 @@ function Movie() {
 
   useEffect(() => {
     getMovie();
+
+    /* MovieCard.map((element, index) => {
+      console.log(element);
+    }); */
   }, []);
 
-  console.log(Movie);
+  // console.log(MovieCard.genres);
+  // console.log(Genres);
 
-  return !Movie.poster_path ? null : (
-    <div>
-      <MovieInfo
-        title={Movie.title}
-        ageRating={Movie.adult}
-        originalLanguage={Movie.original_language}
-        originalTitle={Movie.original_title}
-        description={Movie.overview}
-        posterSource={Movie.poster_path}
-        releaseDate={Movie.release_date}
-        runtime={Movie.runtime}
-        averageScore={Movie.vote_average}
-      />
-    </div>
+  // console.log(Movie.genres[0]);
+
+  return !MovieCard.poster_path ? null : (
+    <MovieInfo
+      title={MovieCard.title}
+      originalLanguage={MovieCard.original_language}
+      originalTitle={MovieCard.original_title}
+      description={MovieCard.overview}
+      posterSource={MovieCard.poster_path}
+      releaseDate={MovieCard.release_date}
+      runtime={MovieCard.runtime}
+      averageScore={MovieCard.vote_average}
+      genres={MovieCard.genres[0].name}
+    />
   );
 }
 

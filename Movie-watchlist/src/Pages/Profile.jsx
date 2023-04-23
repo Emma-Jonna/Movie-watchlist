@@ -1,15 +1,18 @@
 import React, {useState, useEffect} from "react";
 
-import { useSessionStorage } from "usehooks-ts";
+import {useSessionStorage} from "usehooks-ts";
 
 import styles from "../css/style.module.css";
 import {FilmCard} from "../commponents/filmCard";
+import {json, Navigate} from "react-router-dom";
 
 function Profile() {
   const [MovieList, setMovieList] = useState([]);
-  const [Session_id, setSession_id] = useSessionStorage('session_id', "");
+  const [Session_id, setSession_id] = useSessionStorage("session_id", "");
 
-  
+  if (!window.sessionStorage.getItem("session_id")) {
+    return <Navigate to="/login" />;
+  }
 
   useEffect(() => {
     var requestOptions = {
@@ -30,7 +33,7 @@ function Profile() {
 
   return (
     <div>
-      <h1>Profil Works</h1>
+      <h2>Watchlist</h2>
 
       <div>
         <div className={styles.HomeGrid}>
@@ -40,7 +43,7 @@ function Profile() {
               poster_path={item.poster_path}
               title={item.title}
               id={item.id}
-              vote_average={item.vote_average}
+              vote_average={Math.round(item.vote_average * 10) / 10}
             />
           ))}
         </div>
