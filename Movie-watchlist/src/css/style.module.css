@@ -27,7 +27,7 @@
 .HomeGrid {
     display: grid;
     grid-template-columns: repeat(auto-fit, 185px);
-    justify-content: center;
+    /* justify-content: center; */
     column-gap: 1.5rem;
     row-gap: 2.5rem;
     padding-inline: 1rem;
@@ -74,6 +74,52 @@
     line-height: 1.2;
     
     width: 60ch;
+}
+
+/* search form */
+.search {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+
+    padding: 0.35em 0.6em;
+    border: 3px solid var(--viridian);
+    border-radius: .25em;
+    margin-inline: 1rem;
+    margin-bottom: 1.5rem;
+    width: fit-content;
+}
+
+.search label {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}
+
+.search input, .search button {
+    border: none;
+    background-color: transparent;
+}
+.search input {
+    font-family: Lura;
+    font-size: 1.5rem;
+}
+
+.search input:focus-within {
+    outline: transparent;
+}
+
+.search input::placeholder {
+    opacity: 0.4;
+}
+.search button {
+    cursor: pointer;
 }
 
 /* Film card */

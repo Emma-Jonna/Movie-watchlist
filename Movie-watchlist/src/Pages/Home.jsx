@@ -1,10 +1,8 @@
 import {useEffect, useState} from "react";
 import styles from "../css/style.module.css";
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSearch } from "@fortawesome/free-solid-svg-icons";
-
 import {FilmCard} from "../commponents/filmCard";
+import SearchForm from "../commponents/searchForm";
 
 function Home() {
   let [Films, setFilms] = useState([]);
@@ -25,13 +23,12 @@ function Home() {
     setFilms(respondFilms.results);
     setFilm(respondFilms.results[0])
   };
-
-  const filter = () => {
-    films();
-  };
+  
   useEffect(() => {
-    filter();
+    films();
   }, []);
+  
+
   return (
     <>
     <section className={styles.Hero}>
@@ -42,6 +39,9 @@ function Home() {
         <p>{Film.overview}</p>
       </div>
     </section>
+
+    <SearchForm setFilms={setFilms} setFilm={setFilm} />
+
     <div className={styles.HomeGrid}>
       {Films.map((item) => (
         <FilmCard
