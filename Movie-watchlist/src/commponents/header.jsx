@@ -1,5 +1,9 @@
 import {Link} from "react-router-dom";
 
+import { useSessionStorage } from "usehooks-ts";
+
+import axios from "axios";
+
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faUser} from "@fortawesome/free-solid-svg-icons";
 
@@ -8,34 +12,37 @@ import {useEffect, useState} from "react";
 
 function Header() {
   const [Login, setLogin] = useState(false);
-
-    let session_id = window.sessionStorage.getItem('session_id');
-    const access_token = window.sessionStorage.getItem('accessToken');
     
+    const [AccessToken, setAccessToken] = useSessionStorage('accessToken', "");
+    const [Session_id, setSession_id] = useSessionStorage('session_id', "");
+    const [RequestToken, setRequestToken] = useSessionStorage('requestToken', "");
     
     useEffect(() => {
-        console.log(!session_id);
-        setLogin(false)
-        if (!session_id) {
-            setLogin(true)
-        }
-    }, [session_id])
+      setLogin(false)
+      if (!Session_id) {
+        setLogin(true)
+      }
+    }, [Session_id])
 
-    function handelLogUt() {
-        const headers = new Headers();
-        headers.append("Content-Type", "application/json;charset=utf-8");
-        headers.append("Authorization", `Bearer ${import.meta.env.VITE_TMDBv4}`);
+    async function handelLogUt() {
+      try {
+        await axios.delete("https://api.themoviedb.org/4/auth/access_token", {
+          data: { access_token: AccessToken },
+          headers: {
+            "Authorization": `Bearer ${import.meta.env.VITE_TMDBv4}`,
+            "Content-Type": "application/json;charset=utf-8"
+          }
+        })
+      } catch (error) {
+        console.error(error);
+      }
 
-        const body = JSON.stringify({ access_token })
 
-        /* Fetch */
-        fetch('https://api.themoviedb.org/4/auth/access_token', { headers, body, method: "DELETE" })
-            .then(res => res.json())
-            .then(() => {
-            })
-            .catch(e => console.error(e));
-            window.sessionStorage.clear();
-            session_id = null;
+
+      /* Remove sessions */
+      setAccessToken('');
+      setSession_id('');
+      setRequestToken('');
     }
 
   return (
@@ -58,11 +65,11 @@ function Header() {
               </button>
             </li>
           )}
-          <li>
+          {!Login && (<li>
             <Link to="/profile">
               <FontAwesomeIcon icon={faUser} size={"1x"} />
             </Link>
-          </li>
+          </li>)}
         </ul>
       </nav>
     </header>

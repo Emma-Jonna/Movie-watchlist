@@ -1,9 +1,14 @@
 import React, {useState, useEffect} from "react";
+
+import { useSessionStorage } from "usehooks-ts";
+
 import styles from "../css/style.module.css";
 import {FilmCard} from "../commponents/filmCard";
 
 function Profile() {
   const [MovieList, setMovieList] = useState([]);
+  const [Session_id, setSession_id] = useSessionStorage('session_id', "");
+
   
 
   useEffect(() => {
@@ -15,7 +20,7 @@ function Profile() {
     fetch(
       `https://api.themoviedb.org/3/account/{account_id}/watchlist/movies?api_key=${
         import.meta.env.VITE_TMDBv3
-      }&session_id=${window.sessionStorage.getItem("session_id")}`,
+      }&session_id=${Session_id}`,
       requestOptions
     )
       .then((response) => response.json())
