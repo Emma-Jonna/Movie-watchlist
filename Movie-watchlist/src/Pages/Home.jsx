@@ -1,6 +1,8 @@
 import {useEffect, useState} from "react";
 import styles from "../css/style.module.css";
 
+import axios from "axios";
+
 import {FilmCard} from "../commponents/filmCard";
 import SearchForm from "../commponents/searchForm";
 
@@ -9,19 +11,14 @@ function Home() {
   const [Film, setFilm] = useState({});
 
   const films = async () => {
-    const urlFilms = `https://api.themoviedb.org/3/movie/top_rated?api_key=${
-      import.meta.env.VITE_TMDBv3
-    }`;
+    const urlFilms = "https://api.themoviedb.org/3/movie/top_rated";
 
-    const resFilms = await fetch(urlFilms);
+    /* Fetch the movies */
+    const {data: { results }} = await axios.get(urlFilms, { params: { api_key: import.meta.env.VITE_TMDBv3 } });
 
-    const respondFilms = await resFilms.json();
-
-    if (!resFilms.ok) {
-      throw Error("Can´t get film");
-    }
-    setFilms(respondFilms.results);
-    setFilm(respondFilms.results[0])
+    /* Set the state for the Films & Film form results */
+    setFilms(results);
+    setFilm(results[0])
   };
   
   useEffect(() => {
@@ -42,7 +39,7 @@ function Home() {
 
     <SearchForm setFilms={setFilms} setFilm={setFilm} />
 
-    <div className={styles.HomeGrid}>
+    <section className={styles.HomeGrid}>
       {Films.map((item) => (
         <FilmCard
           key={item.id}
@@ -52,7 +49,7 @@ function Home() {
           vote_average={item.vote_average}
         />
       ))}
-    </div>
+    </section>
     </>
   );
 }

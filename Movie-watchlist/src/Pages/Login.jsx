@@ -5,23 +5,27 @@ import { useSessionStorage } from "usehooks-ts";
 import axios from "axios";
 
 function Login() {
+  /* Get / set sessions state */
   const [RequestToken, setRequestToken] = useSessionStorage('requestToken', "");
   const [AccessToken, setAccessToken] = useSessionStorage('accessToken', "");
   const [Session_id, setSession_id] = useSessionStorage('session_id', "");
 
+  /* TMDB urls */
   const TMDBv4URL = "https://api.themoviedb.org/4"
   const TMDBv3URL = "https://api.themoviedb.org/3"
 
 
   async function getRequestToken() {
+    
     const headers = {
       "Authorization": `Bearer ${import.meta.env.VITE_TMDBv4}`,
       "Content-Type": "application/json;charset=utf-8"
     }
+
     try {
       const {data: { request_token }} = await axios.post(`${TMDBv4URL}/auth/request_token`, 
-      { redirect_to: "http://localhost:5173/login"}, 
-      { headers })
+      { redirect_to: "http://localhost:5173/login"}, // Axios body
+      { headers }) // Axios options
       
       setRequestToken(request_token);
     } catch (error) {
@@ -37,8 +41,8 @@ function Login() {
 
     try {
       const {data: { access_token }} = await axios.post(`${ TMDBv4URL }/auth/access_token`, 
-        { request_token: RequestToken}, 
-        { headers })
+        { request_token: RequestToken}, // Axios body
+        { headers }) // Axios options
         
         setAccessToken(access_token);
     } catch (error) {
@@ -48,8 +52,8 @@ function Login() {
 
   async function getSessionId() {
     const {data: {session_id}} = await axios.post(`${TMDBv3URL}/authentication/session/convert/4`, 
-    { access_token: AccessToken}, 
-    { params: { api_key: import.meta.env.VITE_TMDBv3 }})
+    { access_token: AccessToken}, // Axios body
+    { params: { api_key: import.meta.env.VITE_TMDBv3 }}) // Axios options
 
     setSession_id(session_id);
   }

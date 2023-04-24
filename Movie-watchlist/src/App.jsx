@@ -37,7 +37,7 @@ function App() {
   }
 
   return (
-    <div>
+    <>
       <Header />
       <main>
         <FavoriteContext.Provider value={Favorite}>
@@ -49,7 +49,7 @@ function App() {
           </Routes>
         </FavoriteContext.Provider>
       </main>
-    </div>
+    </>
   );
 }
 

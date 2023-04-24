@@ -2,6 +2,8 @@ import styles from "../css/style.module.css";
 
 import { useEffect, useState, useContext } from "react";
 
+import { useSessionStorage } from "usehooks-ts";
+
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faStar} from "@fortawesome/free-solid-svg-icons";
 import {LikeBtn} from "./LikeBtn";
@@ -11,7 +13,9 @@ import { FavoriteContext } from "../App";
 export function FilmCard({ poster_path, title, id, vote_average}) {
 
   let [ Like, setLike ] = useState(false)
-  const session_id = window.sessionStorage.getItem("session_id");
+
+  const [Session_id, setSession_id] = useSessionStorage('session_id', "");
+
   const Favorite = useContext(FavoriteContext);
   
   async function getLike() {
@@ -23,7 +27,7 @@ export function FilmCard({ poster_path, title, id, vote_average}) {
   
   useEffect(() => {
     
-    if (session_id) {
+    if (Session_id) {
       getLike()
         .then(res => {
           setLike(res);
