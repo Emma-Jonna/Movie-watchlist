@@ -7,6 +7,7 @@ function Movie() {
 
   const [MovieCard, setMovie] = useState([]);
   const [Genres, setGenres] = useState([]);
+  const [Production, setProduction] = useState([]);
 
   const getMovie = async () => {
     const requestOptions = {
@@ -25,7 +26,13 @@ function Movie() {
       const movieInfo = await response.json();
 
       setMovie(movieInfo);
-      setGenres(movieInfo.genres);
+
+      const genreNames = movieInfo.genres.map((genre) => genre.name);
+      setGenres(genreNames);
+      const productionCompanies = movieInfo.production_companies.map(
+        (company) => company.name
+      );
+      setProduction(productionCompanies);
 
       return;
     } catch (e) {
@@ -35,16 +42,9 @@ function Movie() {
 
   useEffect(() => {
     getMovie();
-
-    /* MovieCard.map((element, index) => {
-      console.log(element);
-    }); */
   }, []);
 
-  // console.log(MovieCard.genres);
-  // console.log(Genres);
-
-  // console.log(Movie.genres[0]);
+  console.log(MovieCard);
 
   return !MovieCard.poster_path ? null : (
     <MovieInfo
@@ -56,7 +56,22 @@ function Movie() {
       releaseDate={MovieCard.release_date}
       runtime={MovieCard.runtime}
       averageScore={MovieCard.vote_average}
-      genres={MovieCard.genres[0].name}
+      genres={
+        <ul>
+          <li>Genres:</li>
+          {Genres.map((genre, key) => {
+            return <li key={key}>{genre}</li>;
+          })}
+        </ul>
+      }
+      production={
+        <ul>
+          <li>Production companies:</li>
+          {Production.map((company, key) => {
+            return <li key={key}>{company}</li>;
+          })}
+        </ul>
+      }
     />
   );
 }

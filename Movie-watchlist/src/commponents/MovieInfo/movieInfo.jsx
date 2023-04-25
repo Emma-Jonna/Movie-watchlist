@@ -12,14 +12,20 @@ function MovieInfo(props) {
         </div>
         <div className="movie-card-text">
           <h2>{props.title}</h2>
-          <p>Genres: {[props.genres]}</p>
-          <p className={props.production}>production companies</p>
-          <p>Original language: {props.originalLanguage}</p>
-          <p>Original title: {props.originalTitle}</p>
-          <p>Released: {props.releaseDate}</p>
-          <p>Runtime: {props.runtime} min</p>
-          <p>{Math.round(props.averageScore * 10) / 10}/10</p>
-          <p>{props.description}</p>
+          <div>{props.genres}</div>
+          <div>{props.production}</div>
+          <div>
+            <p>Original language: {props.originalLanguage}</p>
+            <p>Original title: {props.originalTitle}</p>
+          </div>
+          <div>
+            <p>Released: {props.releaseDate}</p>
+            <p>Runtime: {props.runtime} min</p>
+            <p>{Math.round(props.averageScore * 10) / 10}/10</p>
+          </div>
+          <div className="description">
+            <p>{props.description}</p>
+          </div>
         </div>
       </div>
     </article>

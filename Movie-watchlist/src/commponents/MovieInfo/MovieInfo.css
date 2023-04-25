@@ -30,12 +30,22 @@
   font-size: 0.8rem;
 }
 
-.movie-card-text p:last-child {
+.description p {
   font-size: 1rem;
 }
 
 article {
   padding: 0 20px;
+}
+
+li:nth-child(1) {
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+li {
+  list-style: none;
+  font-family: "Lora";
 }
 
 @media (min-width: 768px) {
@@ -68,7 +78,7 @@ article {
     font-size: 0.9rem;
   }
 
-  .movie-card-text p:last-child {
+  .description p {
     font-size: 1.2rem;
   }
 }
@@ -86,7 +96,7 @@ article {
     font-size: 1rem;
   }
 
-  .movie-card-text p:last-child {
+  .description p {
     font-size: 1.3rem;
   }
 }
