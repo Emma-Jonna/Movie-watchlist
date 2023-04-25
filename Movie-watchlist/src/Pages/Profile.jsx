@@ -10,7 +10,7 @@ function Profile() {
   const [MovieList, setMovieList] = useState([]);
   const [Session_id, setSession_id] = useSessionStorage("session_id", "");
 
-  if (!window.sessionStorage.getItem("session_id")) {
+  if (!Session_id) {
     return <Navigate to="/login" />;
   }
 

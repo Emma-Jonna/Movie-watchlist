@@ -17,6 +17,10 @@ function App() {
 
   useEffect(() => {
     getWatchlist();
+    console.log(session_id == "");
+    if (session_id == "") {
+      setFavorite([]);
+    }
   }, [session_id]);
 
   async function getWatchlist() {
