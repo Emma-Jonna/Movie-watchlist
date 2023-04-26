@@ -1,10 +1,10 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 
-import {useSessionStorage} from "usehooks-ts";
+import { useSessionStorage } from "usehooks-ts";
 
 import styles from "../css/style.module.css";
-import {FilmCard} from "../commponents/filmCard";
-import {json, Navigate} from "react-router-dom";
+import { FilmCard } from "../commponents/filmCard";
+import { Navigate } from "react-router-dom";
 
 function Profile() {
   const [MovieList, setMovieList] = useState([]);

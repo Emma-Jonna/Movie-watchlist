@@ -43,10 +43,7 @@ function Home() {
       {Films.map((item) => (
         <FilmCard
           key={item.id}
-          poster_path={item.poster_path}
-          title={item.title}
-          id={item.id}
-          vote_average={item.vote_average}
+          Film={item}
         />
       ))}
     </section>

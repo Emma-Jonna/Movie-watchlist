@@ -17,7 +17,7 @@ function App() {
 
   useEffect(() => {
     getWatchlist();
-    console.log(session_id == "");
+    
     if (session_id == "") {
       setFavorite([]);
     }
@@ -44,7 +44,7 @@ function App() {
     <>
       <Header />
       <main>
-        <FavoriteContext.Provider value={Favorite}>
+        <FavoriteContext.Provider value={{Favorite, setFavorite}}>
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/movie/:id" element={<Movie />} />
