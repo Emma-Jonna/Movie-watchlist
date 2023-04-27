@@ -39,7 +39,7 @@ export function FilmCard({ Film }) {
           <span>
             {Film.vote_average}/10 <FontAwesomeIcon icon={faStar} />
           </span>
-          <LikeBtn FilmId={Film.id} Like={Like} setLike={setLike} />
+          <LikeBtn Like={Like} setLike={setLike} Film={Film} />
         </div>
         <Link className={styles.btn} to={"/Movie/" + Film.id}>
           See more

@@ -3,7 +3,7 @@ import styles from "../css/style.module.css";
 
 import axios from "axios";
 
-import {FilmCard} from "../commponents/filmCard";
+import { FilmCard } from "../commponents/filmCard";
 import SearchForm from "../commponents/searchForm";
 
 function Home() {

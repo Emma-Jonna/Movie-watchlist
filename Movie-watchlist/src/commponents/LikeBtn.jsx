@@ -1,13 +1,16 @@
+import { useEffect, useContext } from "react";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
 
-import { useEffect } from "react";
-
 import { useSessionStorage } from "usehooks-ts";
+
+import { FavoriteContext } from "../App";
 
 import axios from "axios";
 
-export function LikeBtn({ FilmId, Like, setLike }) {
+export function LikeBtn({ Film, Like, setLike }) {
+  let { Favorite, setFavorite } = useContext(FavoriteContext);
 
   useEffect(() => {
     setLike(Like);
@@ -23,7 +26,7 @@ export function LikeBtn({ FilmId, Like, setLike }) {
 
     const body = {
       media_type: "movie",
-      media_id: FilmId,
+      media_id: Film.id,
       watchlist: !Like,
     };
 
@@ -41,11 +44,28 @@ export function LikeBtn({ FilmId, Like, setLike }) {
       }
     );
   };
+
+  const removeFavorite = () => {
+    const isAdded = Favorite.filter((val) => {
+      return val.id == Film.id;
+    });
+
+    /* if Favorite already exist */
+    if (isAdded.length == 1) {
+      return Favorite.filter((val) => {
+        return val.id != Film.id;
+      });
+    }
+
+    /* if not exist */
+    return [...Favorite, Film];
+  };
+
   function clickLike() {
     if (Session_id) {
       addFavorit()
         .then(() => {
-          setLike(!Like);
+          setFavorite(removeFavorite());
         })
         .catch((e) => {
           console.error(e);
