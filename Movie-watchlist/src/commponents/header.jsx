@@ -1,6 +1,6 @@
 import {Link} from "react-router-dom";
-
-import { useSessionStorage } from "usehooks-ts";
+import {Navigate, useNavigate} from "react-router-dom";
+import {useSessionStorage} from "usehooks-ts";
 
 import axios from "axios";
 
@@ -12,38 +12,43 @@ import {useEffect, useState} from "react";
 
 function Header() {
   const [Login, setLogin] = useState(false);
-    
-    const [AccessToken, setAccessToken] = useSessionStorage('accessToken', "");
-    const [Session_id, setSession_id] = useSessionStorage('session_id', "");
-    const [RequestToken, setRequestToken] = useSessionStorage('requestToken', "");
-    
-    useEffect(() => {
-      setLogin(false)
-      if (!Session_id) {
-        setLogin(true)
-      }
-    }, [Session_id])
 
-    async function handelLogUt() {
-      try {
-        await axios.delete("https://api.themoviedb.org/4/auth/access_token", {
-          data: { access_token: AccessToken },
-          headers: {
-            "Authorization": `Bearer ${import.meta.env.VITE_TMDBv4}`,
-            "Content-Type": "application/json;charset=utf-8"
-          }
-        })
-      } catch (error) {
-        console.error(error);
-      }
+  const [AccessToken, setAccessToken] = useSessionStorage("accessToken");
+  const [Session_id, setSession_id] = useSessionStorage("session_id");
+  const [RequestToken, setRequestToken] = useSessionStorage("requestToken");
 
+  const navigate = useNavigate();
 
-
-      /* Remove sessions */
-      setAccessToken('');
-      setSession_id('');
-      setRequestToken('');
+  useEffect(() => {
+    setLogin(false);
+    if (!Session_id) {
+      setLogin(true);
     }
+  }, [Session_id]);
+
+  async function handelLogUt() {
+    try {
+      await axios.delete("https://api.themoviedb.org/4/auth/access_token", {
+        data: {access_token: AccessToken},
+        headers: {
+          Authorization: `Bearer ${import.meta.env.VITE_TMDBv4}`,
+          "Content-Type": "application/json;charset=utf-8",
+        },
+      });
+    } catch (error) {
+      console.error(error);
+    }
+
+    /* Remove sessions */
+    setAccessToken("");
+    setSession_id("");
+    setRequestToken("");
+    sessionStorage.removeItem("requestToken");
+    sessionStorage.removeItem("accessToken");
+    sessionStorage.removeItem("session_id");
+
+    // navigate("/login");
+  }
 
   return (
     <header className={styles.Header}>
@@ -65,11 +70,13 @@ function Header() {
               </button>
             </li>
           )}
-          {!Login && (<li>
-            <Link to="/profile">
-              <FontAwesomeIcon icon={faUser} size={"1x"} />
-            </Link>
-          </li>)}
+          {!Login && (
+            <li>
+              <Link to="/profile">
+                <FontAwesomeIcon icon={faUser} size={"1x"} />
+              </Link>
+            </li>
+          )}
         </ul>
       </nav>
     </header>
