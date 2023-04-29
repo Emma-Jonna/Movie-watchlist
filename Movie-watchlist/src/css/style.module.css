@@ -171,3 +171,17 @@
 
     cursor: pointer;
 }
+
+.PaginateContainer {
+    display: flex;
+    gap: .5rem;
+}
+
+.PaginateContainer li {
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+
+.PaginateContainer li.selected, .PaginateContainer li.active {
+    color: var(--flame);
+}
