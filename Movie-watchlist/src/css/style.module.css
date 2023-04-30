@@ -172,6 +172,7 @@
     cursor: pointer;
 }
 
+/* Paginate */
 .PaginateContainer {
     display: flex;
     gap: .5rem;
@@ -180,15 +181,23 @@
     border-radius: .25rem;
     padding: .5rem 1rem;
     margin-inline: auto;
+    margin-block: 2rem;
+}
+
+.PaginateContainer li.selected {
+    color: var(--flame);
+}
+
+.PaginateContainer li:first-of-type{
+    margin-right: 4.75rem;
+}
+.PaginateContainer li:last-of-type{
+    margin-left: 4.75rem;
 }
 
 .PaginateContainer li a {
     font-size: 1.5rem;
     cursor: pointer;
-}
-
-.PaginateContainer li.selected {
-    color: var(--flame);
 }
 
 .PaginateContainer [aria-disabled="false"] {

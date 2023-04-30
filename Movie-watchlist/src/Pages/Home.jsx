@@ -77,8 +77,8 @@ function Home() {
                     <FilmCard key={item.id} Film={item} />
                 ))}
             </section>
-
-            <ReactPaginate
+            
+            {PageCount > 1 &&  <ReactPaginate
                 onPageChange={handlePageClick}
                 renderOnZeroPageCount={undefined}
                 pageCount={PageCount}
@@ -88,7 +88,7 @@ function Home() {
                 activeClassName={styles.selected}
                 activeLinkClassName={styles.active}
                 disabledClassName={styles.disabled}
-            />
+            />}
         </>
     );
 }

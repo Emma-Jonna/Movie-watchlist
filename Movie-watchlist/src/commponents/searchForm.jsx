@@ -23,7 +23,7 @@ export default function SearchForm({
     async function films() {
         const baseURL = "https://api.themoviedb.org/3";
 
-        if (Search.length > 0) {
+        if (Search) {
             const {
                 data: { results, total_pages },
             } = await axios.get(`${baseURL}/search/movie`, {
