@@ -175,13 +175,26 @@
 .PaginateContainer {
     display: flex;
     gap: .5rem;
+    background-color: var(--platinum);
+    width: fit-content;
+    border-radius: .25rem;
+    padding: .5rem 1rem;
+    margin-inline: auto;
 }
 
-.PaginateContainer li {
-    font-size: 1.2rem;
+.PaginateContainer li a {
+    font-size: 1.5rem;
     cursor: pointer;
 }
 
-.PaginateContainer li.selected, .PaginateContainer li.active {
+.PaginateContainer li.selected {
     color: var(--flame);
+}
+
+.PaginateContainer [aria-disabled="false"] {
+    color: var(--flame);
+}
+
+.PaginateContainer [aria-disabled="true"] {
+    color: var(--prussian-blue);
 }
