@@ -1,5 +1,5 @@
 import {useEffect} from "react";
-import {Navigate} from "react-router-dom";
+import {Navigate, useLocation} from "react-router-dom";
 
 import {useSessionStorage} from "usehooks-ts";
 import axios from "axios";
@@ -9,6 +9,7 @@ function Login() {
   const [RequestToken, setRequestToken] = useSessionStorage("requestToken");
   const [AccessToken, setAccessToken] = useSessionStorage("accessToken");
   const [Session_id, setSession_id] = useSessionStorage("session_id");
+  const baseUrl = window.location.origin
 
   /* TMDB urls */
   const TMDBv4URL = "https://api.themoviedb.org/4";
@@ -25,7 +26,7 @@ function Login() {
         data: {request_token},
       } = await axios.post(
         `${TMDBv4URL}/auth/request_token`,
-        {redirect_to: "http://localhost:5173/profile"}, // Axios body
+        {redirect_to: `${baseUrl}/profile`}, // Axios body
         {headers}
       ); // Axios options
 
