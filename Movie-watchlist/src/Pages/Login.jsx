@@ -1,8 +1,8 @@
 import { useEffect } from "react";
 import { Navigate, useLocation } from "react-router-dom";
-
 import { useSessionStorage } from "usehooks-ts";
 import axios from "axios";
+import "../css/login.css";
 
 function Login() {
     /* Get / set sessions state */
@@ -49,10 +49,15 @@ function Login() {
     }
 
     return (
-        <div>
-            <h1>Login Works</h1>
-            <button onClick={AcceptRequestToken}>Login</button>
-        </div>
+        <article className="login-wrapper">
+            <div className="login-container">
+                <div className="login-text">
+                    <h1>TMDB watchlist</h1>
+                    <p>May the fourth be with you</p>
+                </div>
+                <button onClick={AcceptRequestToken}>Login</button>
+            </div>
+        </article>
     );
 }
 
