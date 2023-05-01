@@ -11,6 +11,10 @@
     font-family: "IBM Plex Sans";
 }
 
+.login-container button:hover {
+    cursor: pointer;
+}
+
 .login-container button {
     color: var(--floral-white);
     background-color: var(--viridian);
@@ -21,10 +25,6 @@
     border: none;
 }
 
-.login-container button:hover {
-    cursor: pointer;
-}
-
 .login-text h1 {
     font-size: 3rem;
     padding-bottom: 30px;
@@ -32,4 +32,42 @@
 
 .login-text p {
     font-size: 0.5rem;
+}
+
+@media (min-width: 768px) {
+    .login-container button {
+        font-size: 1.4rem;
+        width: 120px;
+        height: 60px;
+        border-radius: 0.25em;
+        border: none;
+    }
+
+    .login-text h1 {
+        font-size: 4rem;
+        padding-bottom: 30px;
+    }
+
+    .login-text p {
+        font-size: 0.6rem;
+    }
+}
+
+@media (min-width: 1024px) {
+    .login-container button {
+        font-size: 1.6rem;
+        width: 140px;
+        height: 70px;
+        border-radius: 0.25em;
+        border: none;
+    }
+
+    .login-text h1 {
+        font-size: 5rem;
+        padding-bottom: 30px;
+    }
+
+    .login-text p {
+        font-size: 0.7rem;
+    }
 }
