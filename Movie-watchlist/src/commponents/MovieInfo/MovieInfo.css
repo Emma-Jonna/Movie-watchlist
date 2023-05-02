@@ -1,102 +1,117 @@
 .movie-card {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  gap: 30px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 30px;
 }
 
 .movie-card-poster {
-  width: 100%;
-  display: flex;
-  justify-content: center;
+    width: 100%;
+    display: flex;
+    justify-content: center;
 }
 
 .movie-card-text {
-  width: 100%;
-  padding: 0;
+    width: 100%;
+    padding: 0;
 }
 
 .movie-card-text > h2 {
-  font-family: "IBM Plex Sans";
-  margin: 0;
-  font-size: 2rem;
+    font-family: "IBM Plex Sans";
+    margin: 0;
+    font-size: 2rem;
 }
 
 .movie-card-text p {
-  font-family: "Lora";
+    font-family: "Lora";
 }
 
 .movie-card-text p:not(.movie-card-text p:last-child) {
-  font-size: 0.8rem;
+    font-size: 0.8rem;
 }
 
 .description p {
-  font-size: 1rem;
+    font-size: 1rem;
 }
 
-article {
-  padding: 0 20px;
+.movie-wrapper {
+    padding: 0 20px 40px 20px;
 }
 
 li:nth-child(1) {
-  font-size: 1.2rem;
-  font-weight: 600;
+    font-size: 1.2rem;
+    font-weight: 600;
 }
 
 li {
-  list-style: none;
-  font-family: "Lora";
+    list-style: none;
+    font-family: "Lora";
+}
+
+.movie-card-button {
+    color: var(--floral-white);
+    background-color: var(--viridian);
+    font-family: "IBM Plex Sans";
+    font-size: 1.3rem;
+    font-weight: bold;
+    text-decoration: none;
+    border-radius: 0.25em;
+    padding: 15px 35px;
+}
+
+.movie-card-button-container {
+    margin: 40px 0 50px 30px;
 }
 
 @media (min-width: 768px) {
-  .movie-card {
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-    width: 100%;
-  }
+    .movie-card {
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+        width: 100%;
+    }
 
-  .movie-card-poster {
-    width: 30%;
-    display: flex;
-    justify-content: center;
-  }
+    .movie-card-poster {
+        width: 30%;
+        display: flex;
+        justify-content: center;
+    }
 
-  .movie-card-text {
-    width: 70%;
-  }
+    .movie-card-text {
+        width: 70%;
+    }
 
-  article {
-    padding: 0 40px 0 0;
-  }
+    .movie-wrapper {
+        padding: 0 40px 60px 0;
+    }
 
-  .movie-card-text > h2 {
-    font-size: 2.2rem;
-  }
+    .movie-card-text > h2 {
+        font-size: 2.2rem;
+    }
 
-  .movie-card-text p:not(.movie-card-text p:last-child) {
-    font-size: 0.9rem;
-  }
+    .movie-card-text p:not(.movie-card-text p:last-child) {
+        font-size: 0.9rem;
+    }
 
-  .description p {
-    font-size: 1.2rem;
-  }
+    .description p {
+        font-size: 1.2rem;
+    }
 }
 
 @media (min-width: 1024px) {
-  article {
-    padding: 0 60px 0 0;
-  }
+    .movie-wrapper {
+        padding: 0 60px 80px 0;
+    }
 
-  .movie-card-text > h2 {
-    font-size: 2.5rem;
-  }
+    .movie-card-text > h2 {
+        font-size: 2.5rem;
+    }
 
-  .movie-card-text p:not(.movie-card-text p:last-child) {
-    font-size: 1rem;
-  }
+    .movie-card-text p:not(.movie-card-text p:last-child) {
+        font-size: 1rem;
+    }
 
-  .description p {
-    font-size: 1.3rem;
-  }
+    .description p {
+        font-size: 1.3rem;
+    }
 }

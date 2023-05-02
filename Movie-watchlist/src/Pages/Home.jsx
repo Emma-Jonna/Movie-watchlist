@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import styles from "../css/style.module.css";
-
+import { Navigate, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -22,14 +22,17 @@ function Home() {
     const [PageCount, setPageCount] = useState(0);
     const [CurentPage, setCurentPage] = useState(1);
 
+    const navigate = useNavigate();
+
     const films = async () => {
         const urlFilms = "https://api.themoviedb.org/3/movie/top_rated";
 
         /* Fetch the movies */
-        const {
+        const { Paginate-home
             data: { results, total_pages, total_results },
         } = await axios.get(urlFilms, {
             params: { api_key: import.meta.env.VITE_TMDBv3, page: CurentPage },
+ main
         });
 
         /* Set the state for the Films & Film form results */
@@ -48,6 +51,7 @@ function Home() {
     }, [CurentPage]);
 
     return (
+ main
         <>
             <section className={styles.Hero}>
                 <img
