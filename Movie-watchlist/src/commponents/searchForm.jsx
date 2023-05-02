@@ -16,10 +16,12 @@ export default function SearchForm({
 }) {
     const handelSubmit = (e) => {
         e.preventDefault();
-        setSearch(e.target[0].value.trim());
-
+        
         films();
     };
+    const updateState = (e)=> {
+        setSearch(e.target.value.trim());
+    } 
     async function films() {
         const baseURL = "https://api.themoviedb.org/3";
 
@@ -65,6 +67,7 @@ export default function SearchForm({
                     name="sök"
                     id="sök"
                     placeholder="Sök på din fvavorit film"
+                    onChange={updateState}
                 />
             </div>
             <button type="submit">
