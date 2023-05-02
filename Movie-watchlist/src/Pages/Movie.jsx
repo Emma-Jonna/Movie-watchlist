@@ -28,7 +28,15 @@ function Movie() {
                 setLike(res);
             })
             .catch((e) => console.error(e));
-    }, [Favorite]);
+    }, [Favorite, MovieCard.poster_path]);
+
+    useEffect(() => {
+        if (!sessionStorage.getItem("session_id")) {
+            navigate("/login");
+        } else {
+            getMovie();
+        }
+    }, []);
 
     const getMovie = async () => {
         const requestOptions = {
@@ -61,15 +69,7 @@ function Movie() {
         }
     };
 
-    useEffect(() => {
-        if (!sessionStorage.getItem("session_id")) {
-            navigate("/login");
-        } else {
-            getMovie();
-        }
-    }, []);
-
-    console.log(MovieCard);
+    // console.log(MovieCard);
 
     return !MovieCard.poster_path ? null : (
         <section className="movie-info-wrapper">

@@ -18,3 +18,8 @@ body {
     background-color: var(--floral-white);
     color: var(--prussian-blue);
 }
+
+.header-logo img {
+    width: 60px;
+    height: 60px;
+}

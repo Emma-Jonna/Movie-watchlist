@@ -67,19 +67,15 @@ function Profile() {
         }
     }, []);
 
-    useEffect(
-        () => {
-            if (
-                !sessionStorage.getItem("requestToken") ||
-                AccessToken === "undefined"
-            ) {
-                console.log("token dosen't exist");
-                navigate("/login");
-            }
-        },
-        [sessionStorage.getItem("requestToken")],
-        AccessToken
-    );
+    useEffect(() => {
+        if (
+            !sessionStorage.getItem("requestToken") ||
+            AccessToken === "undefined"
+        ) {
+            console.log("token dosen't exist");
+            navigate("/login");
+        }
+    }, [sessionStorage.getItem("requestToken"), AccessToken]);
 
     useEffect(() => {
         if (sessionStorage.getItem("accessToken")) {
