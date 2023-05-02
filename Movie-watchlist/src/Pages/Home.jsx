@@ -44,6 +44,9 @@ function Home() {
         setCurentPage(selected + 1);
     };
     useEffect(() => {
+        if (!sessionStorage.getItem("session_id")) {
+            navigate("/login");
+        }
         if (!Search) {
             films();
         }

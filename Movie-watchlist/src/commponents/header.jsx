@@ -50,7 +50,10 @@ function Header() {
 
     return (
         <header className={styles.Header}>
-            <img src="https://picsum.photos/60" alt="" />
+            {/* <img src="https://picsum.photos/60" alt="" /> */}
+            <div className="header-logo">
+                <img src="./assets/logo.png" alt="" />
+            </div>
             <nav>
                 <ul>
                     <li>

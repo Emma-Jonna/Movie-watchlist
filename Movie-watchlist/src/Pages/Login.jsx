@@ -53,7 +53,6 @@ function Login() {
             <div className="login-container">
                 <div className="login-text">
                     <h1>TMDB watchlist</h1>
-                    <p>May the fourth be with you</p>
                 </div>
                 <button onClick={AcceptRequestToken}>Login</button>
             </div>
