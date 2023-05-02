@@ -28,11 +28,10 @@ function Home() {
         const urlFilms = "https://api.themoviedb.org/3/movie/top_rated";
 
         /* Fetch the movies */
-        const { Paginate-home
+        const {
             data: { results, total_pages, total_results },
         } = await axios.get(urlFilms, {
             params: { api_key: import.meta.env.VITE_TMDBv3, page: CurentPage },
- main
         });
 
         /* Set the state for the Films & Film form results */
@@ -51,7 +50,6 @@ function Home() {
     }, [CurentPage]);
 
     return (
- main
         <>
             <section className={styles.Hero}>
                 <img
@@ -68,10 +66,8 @@ function Home() {
             <SearchForm
                 setFilms={setFilms}
                 setFilm={setFilm}
-                
                 setPageCount={setPageCount}
                 CurentPage={CurentPage}
-                
                 Search={Search}
                 setSearch={setSearch}
             />
@@ -81,18 +77,20 @@ function Home() {
                     <FilmCard key={item.id} Film={item} />
                 ))}
             </section>
-            
-            {PageCount > 1 &&  <ReactPaginate
-                onPageChange={handlePageClick}
-                renderOnZeroPageCount={undefined}
-                pageCount={PageCount}
-                previousLabel={<FontAwesomeIcon icon={faAngleLeft} />}
-                nextLabel={<FontAwesomeIcon icon={faAngleRight} />}
-                containerClassName={styles.PaginateContainer}
-                activeClassName={styles.selected}
-                activeLinkClassName={styles.active}
-                disabledClassName={styles.disabled}
-            />}
+
+            {PageCount > 1 && (
+                <ReactPaginate
+                    onPageChange={handlePageClick}
+                    renderOnZeroPageCount={undefined}
+                    pageCount={PageCount}
+                    previousLabel={<FontAwesomeIcon icon={faAngleLeft} />}
+                    nextLabel={<FontAwesomeIcon icon={faAngleRight} />}
+                    containerClassName={styles.PaginateContainer}
+                    activeClassName={styles.selected}
+                    activeLinkClassName={styles.active}
+                    disabledClassName={styles.disabled}
+                />
+            )}
         </>
     );
 }
