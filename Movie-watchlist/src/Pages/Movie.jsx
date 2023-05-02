@@ -1,15 +1,34 @@
 import { useParams } from "react-router-dom";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import MovieInfo from "../commponents/MovieInfo";
 import { Link, Navigate, useNavigate } from "react-router-dom";
+import { LikeBtn } from "../commponents/LikeBtn";
+import { FavoriteContext } from "../App";
 
 function Movie() {
     const { id } = useParams();
     const [MovieCard, setMovie] = useState([]);
     const [Genres, setGenres] = useState([]);
     const [Production, setProduction] = useState([]);
+    let [Like, setLike] = useState(false);
+    let { Favorite, setFavorite } = useContext(FavoriteContext);
 
     const navigate = useNavigate();
+
+    async function getLike() {
+        const data = Favorite.filter((val) => {
+            return val.title == MovieCard.title;
+        });
+        return data.length >= 1;
+    }
+
+    useEffect(() => {
+        getLike()
+            .then((res) => {
+                setLike(res);
+            })
+            .catch((e) => console.error(e));
+    }, [Favorite]);
 
     const getMovie = async () => {
         const requestOptions = {
@@ -83,6 +102,7 @@ function Movie() {
                     </ul>
                 }
             />
+            <LikeBtn Like={Like} setLike={setLike} Film={MovieCard} />
         </section>
     );
 }

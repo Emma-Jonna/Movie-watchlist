@@ -49,7 +49,7 @@ function Home() {
         }
     }, [CurentPage]);
 
-    return (
+    return !Film.backdrop_path ? null : (
         <>
             <section className={styles.Hero}>
                 {Film.backdrop_path ? (
