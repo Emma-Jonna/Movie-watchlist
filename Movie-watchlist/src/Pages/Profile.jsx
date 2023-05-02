@@ -1,5 +1,5 @@
 import { useState, useEffect, useContext } from "react";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useSessionStorage } from "usehooks-ts";
 import styles from "../css/style.module.css";
 import { FilmCard } from "../commponents/filmCard";
@@ -116,7 +116,7 @@ function Profile() {
 
     return !MovieList ? null : (
         <div>
-            <h2>Watchlist</h2>
+            <h1 className={styles.h1}>Watchlist</h1>
             <div>
                 <div className={styles.HomeGrid}>
                     {Favorite.map((item) => (
