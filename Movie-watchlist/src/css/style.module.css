@@ -27,7 +27,7 @@
 .HomeGrid {
     display: grid;
     grid-template-columns: repeat(auto-fit, 185px);
-    /* justify-content: center; */
+    justify-content: center;
     column-gap: 1.5rem;
     row-gap: 2.5rem;
     padding-inline: 1rem;

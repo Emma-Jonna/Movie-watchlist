@@ -52,10 +52,14 @@ function Home() {
     return (
         <>
             <section className={styles.Hero}>
-                <img
-                    src={`https://image.tmdb.org/t/p/w1280/${Film.backdrop_path}`}
-                    alt=""
-                />
+                {Film.backdrop_path ? (
+                    <img
+                        src={`https://image.tmdb.org/t/p/w1280/${Film.backdrop_path}`}
+                        alt=""
+                    />
+                ) : (
+                    <img src="./assets/No backdrop.png" alt="" />
+                )}
 
                 <div className={styles.container}>
                     <h1>{Film.title}</h1>
