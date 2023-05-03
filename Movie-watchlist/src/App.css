@@ -23,3 +23,10 @@ body {
     width: 60px;
     height: 60px;
 }
+
+
+@media screen and (max-width: 450px) {
+    html {
+        font-size: 8px;
+    }
+}
