@@ -4,6 +4,7 @@ import MovieInfo from "../commponents/MovieInfo";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import { LikeBtn } from "../commponents/LikeBtn";
 import { FavoriteContext } from "../App";
+import { useSessionStorage } from "usehooks-ts";
 
 function Movie() {
     const { id } = useParams();
@@ -12,6 +13,7 @@ function Movie() {
     const [Production, setProduction] = useState([]);
     let [Like, setLike] = useState(false);
     let { Favorite, setFavorite } = useContext(FavoriteContext);
+    const [Session_id, setSession_id] = useSessionStorage("session_id");
 
     const navigate = useNavigate();
 
@@ -74,7 +76,7 @@ function Movie() {
     return !MovieCard.poster_path ? null : (
         <section className="movie-info-wrapper">
             <div className="movie-card-button-container">
-                <Link className="movie-card-button" to="/">{`< Back`}</Link>
+                <Link className="movie-card-button" to="/">{`< Home`}</Link>
             </div>
             <MovieInfo
                 title={MovieCard.title}
@@ -101,8 +103,10 @@ function Movie() {
                         })}
                     </ul>
                 }
+                likeButton={
+                    <LikeBtn Like={Like} setLike={setLike} Film={MovieCard} />
+                }
             />
-            <LikeBtn Like={Like} setLike={setLike} Film={MovieCard} />
         </section>
     );
 }
