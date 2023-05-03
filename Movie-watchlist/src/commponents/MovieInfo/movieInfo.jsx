@@ -7,7 +7,7 @@ function MovieInfo(props) {
                 <div className="movie-card-poster">
                     <img
                         src={
-                            "https://image.tmdb.org/t/p/w185/" +
+                            "https://image.tmdb.org/t/p/w342/" +
                             props.posterSource
                         }
                         alt=""
