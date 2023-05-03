@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 import styles from "../css/style.module.css";
 import { useEffect, useState } from "react";
+import LogoIMage from "../../public/assets/movieLogo.png";
 function Header() {
     const [Login, setLogin] = useState(false);
     const [AccessToken, setAccessToken] = useSessionStorage("accessToken");
@@ -52,7 +53,7 @@ function Header() {
         <header className={styles.Header}>
             {/* <img src="https://picsum.photos/60" alt="" /> */}
             <Link to="/" className="header-logo">
-                <img src="./assets/logo.png" alt="" />
+                <img src={LogoIMage} alt="" />
             </Link>
             <nav>
                 <ul>
