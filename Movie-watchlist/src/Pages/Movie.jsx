@@ -5,6 +5,7 @@ import { Link, Navigate, useNavigate } from "react-router-dom";
 import { LikeBtn } from "../commponents/LikeBtn";
 import { FavoriteContext } from "../App";
 import { useSessionStorage } from "usehooks-ts";
+import BackButton from "../commponents/BackButton";
 
 function Movie() {
     const { id } = useParams();
@@ -75,9 +76,10 @@ function Movie() {
 
     return !MovieCard.poster_path ? null : (
         <section className="movie-info-wrapper">
-            <div className="movie-card-button-container">
+            {/* <div className="movie-card-button-container">
                 <Link className="movie-card-button" to="/">{`< Home`}</Link>
-            </div>
+            </div> */}
+            <BackButton text={`< Home`} location={`/`} />
             <MovieInfo
                 title={MovieCard.title}
                 originalLanguage={MovieCard.original_language}
