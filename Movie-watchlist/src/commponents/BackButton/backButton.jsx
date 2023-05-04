@@ -1,5 +1,4 @@
 import { Link, Navigate, useNavigate } from "react-router-dom";
-import "./backButton.css";
 
 export default function BackButton(props) {
     return (
