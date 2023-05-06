@@ -1,6 +1,5 @@
 import styles from "../css/style.module.css";
 
-import { FavoriteContext } from "../App";
 import { Result } from "../interface/top rated";
 
 import { useState, useContext, useEffect } from "react";
@@ -8,13 +7,14 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import LikeBtn from "./LikeBtn";
+import { FavoriteContext } from "../Context/Favorite";
 
 export default function FilmCard({ Film }: { Film: Result }) {
     const [Like, setLike] = useState(false);
 
-    const { Favorite, setFavorite } = useContext(FavoriteContext);
+    const { Favorite, setFavorite } = useContext(FavoriteContext);;
 
-    async function getLike (Favorite: Result[]) {
+    async function getLike(Favorite: Result[]) {
         const data = Favorite.filter(val => {
             return val.title == Film.title;
         });
@@ -23,11 +23,13 @@ export default function FilmCard({ Film }: { Film: Result }) {
     }
 
     useEffect(() => {
-        getLike(Favorite)
-            .then(res => {
-                setLike(res)
-            })
-            .catch(e => console.error(e))
+        if (Favorite) {
+            getLike(Favorite)
+                .then(res => {
+                    setLike(res)
+                })
+                .catch(e => console.error(e))
+        }
     }, [Favorite])
 
     return (

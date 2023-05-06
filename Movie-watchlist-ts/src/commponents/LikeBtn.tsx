@@ -1,10 +1,10 @@
 import { useEffect, useContext } from "react";
-import { FavoriteContext } from "../App";
 import { Result } from "../interface/top rated";
 import { useSessionStorage } from "usehooks-ts";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
+import { FavoriteContext } from "../Context/Favorite";
 
 
 type LikeBtnType = {
@@ -14,7 +14,7 @@ type LikeBtnType = {
 }
 
 export default function LikeBtn({ Film, Like, setLike }: LikeBtnType) {
-    let { Favorite, setFavorite } = useContext(FavoriteContext);
+    const {Favorite, setFavorite} = useContext(FavoriteContext);
 
     useEffect(() => {
         setLike(Like)
@@ -52,27 +52,31 @@ export default function LikeBtn({ Film, Like, setLike }: LikeBtnType) {
         );
     };
 
-    const removeFavorite = (Favorite: Result[]) => {
-        const isAdded = Favorite.filter(val => {
-            return val.id == Film.id
-        })
+    const removeFavorite = (Favorite:Result[]) => {
+        if (Favorite) {
+            const isAdded = Favorite.filter(val => {
+                return val.id == Film.id
+            })
 
-        /* if Favorite already exist */
-        if (isAdded.length == 1) {
-            return Favorite.filter(val => {
-                return val.id != Film.id;
-            });
-        }
-
-        /* if not exist */
-        return [...Favorite, Film];
+            /* if Favorite already exist */
+            if (isAdded?.length == 1) {
+                return Favorite.filter(val => {
+                    return val.id != Film.id
+                })
+            }
+            
+            return [...Favorite, Film]
+        } 
+        return []
     }
 
     function clickLink() {
         if (Session_id) {
-            addFavorite({Film, Like, setLike})
+            addFavorite({ Film, Like, setLike })
                 .then(() => {
-                    setFavorite(removeFavorite(Favorite))
+                    if (Favorite) {
+                        setFavorite(removeFavorite(Favorite))
+                    }
                 })
                 .catch((e) => {
                     console.log(e)
@@ -82,7 +86,7 @@ export default function LikeBtn({ Film, Like, setLike }: LikeBtnType) {
 
     return (
         <FontAwesomeIcon
-        onClick={clickLink}
+            onClick={clickLink}
             icon={faHeart}
             color={Like ? "var(--flame)" : "var(--prussian-blue)"}
         />
