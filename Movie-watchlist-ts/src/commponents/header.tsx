@@ -1,19 +1,17 @@
-import { Link } from "react-router-dom";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { useSessionStorage } from "usehooks-ts";
-import axios from "axios";
-
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
-
+import axios from "axios";
 import styles from "../css/style.module.css";
-import { useEffect, useState } from "react";
-import LogoIMage from "../../public/assets/movieLogo.png";
-function Header() {
+import LogoIMage from "../assets/movieLogo.png";
+
+export default function Header() {
     const [Login, setLogin] = useState(false);
-    const [AccessToken, setAccessToken] = useSessionStorage("accessToken");
-    const [Session_id, setSession_id] = useSessionStorage("session_id");
-    const [RequestToken, setRequestToken] = useSessionStorage("requestToken");
+    const [AccessToken, setAccessToken] = useSessionStorage("accessToken", "");
+    const [Session_id, setSession_id] = useSessionStorage("session_id", "");
+    const [RequestToken, setRequestToken] = useSessionStorage("requestToken", "");
 
     const navigate = useNavigate();
 
@@ -89,5 +87,3 @@ function Header() {
         </header>
     );
 }
-
-export default Header;

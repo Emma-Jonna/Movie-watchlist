@@ -27,17 +27,13 @@
 .h1 {
     font-family: "IBM Plex Sans";
     font-size: 5rem;
-    background-image: linear-gradient(
-        45deg,
-        var(--prussian-blue),
-        var(--viridian)
-    );
+    background-image: linear-gradient(45deg, var(--prussian-blue), var(--viridian));
     background-clip: text;
     -webkit-background-clip: text;
     color: transparent;
     width: fit-content;
     margin-left: 1rem;
-    margin-bottom: 0.3em;
+    margin-bottom: .3em;
 }
 
 .HomeGrid {
@@ -66,7 +62,7 @@
 .Hero .container {
     position: absolute;
     bottom: 0px;
-
+    
     font-family: "IBM Plex Sans";
 
     display: flex;
@@ -89,7 +85,7 @@
 .Hero .container p {
     font-size: 1.5rem;
     line-height: 1.2;
-
+    
     width: 60ch;
 }
 
@@ -97,11 +93,11 @@
 .search {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: .5rem;
 
     padding: 0.35em 0.6em;
     border: 3px solid var(--viridian);
-    border-radius: 0.25em;
+    border-radius: .25em;
     margin-inline: 1rem;
     margin-bottom: 1.5rem;
     width: fit-content;
@@ -119,8 +115,7 @@
     border-width: 0;
 }
 
-.search input,
-.search button {
+.search input, .search button {
     border: none;
     background-color: transparent;
 }
@@ -146,7 +141,7 @@
     flex-direction: column;
 
     box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.15);
-    border-radius: 0.25rem;
+    border-radius: .25rem;
     overflow: hidden;
 }
 
@@ -155,7 +150,7 @@
     flex-direction: column;
     gap: 1.5rem;
 
-    padding: 0.5rem 0.8rem;
+    padding: .5rem .8rem;
 }
 
 .filmCard .filmCardContiner h2 {
@@ -168,6 +163,7 @@
     font-size: 1.3rem;
 }
 
+
 /* Button */
 .btn {
     display: flex;
@@ -176,8 +172,8 @@
     font-size: 1.2rem;
     color: var(--floral-white);
     background-color: var(--viridian);
-    padding-block: 0.7em;
-    border-radius: 0.25em;
+    padding-block: .7em;
+    border-radius: .25em;
 }
 .signout {
     font-size: 1.5rem;
@@ -192,23 +188,24 @@
 /* Paginate */
 .PaginateContainer {
     display: flex;
-    gap: 0.5rem;
+    gap: .5rem;
     background-color: var(--platinum);
     width: fit-content;
-    border-radius: 0.25rem;
-    padding: 0.5rem 1rem;
+    border-radius: .25rem;
+    padding: .5rem 1rem;
     margin-inline: auto;
     margin-block: 2rem;
+    list-style: none;
 }
 
 .PaginateContainer li.selected {
     color: var(--flame);
 }
 
-.PaginateContainer li:first-of-type {
+.PaginateContainer li:first-of-type{
     margin-right: 4.75rem;
 }
-.PaginateContainer li:last-of-type {
+.PaginateContainer li:last-of-type{
     margin-left: 4.75rem;
 }
 

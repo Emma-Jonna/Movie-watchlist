@@ -30,7 +30,6 @@ export function FilmCard({ Film }) {
                   .catch((e) => console.error(e));
       }, [Favorite]);
 
-    // return <h1></h1>
     return (
         <div className={styles.filmCard}>
             {Film.poster_path ? (

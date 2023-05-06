@@ -1,0 +1,25 @@
+* {
+    padding: 0px;
+    margin: 0px;
+    text-decoration: none;
+    box-sizing: border-box;
+}
+
+:root {
+    /* CSS HSL */
+    --floral-white: hsla(46, 100%, 97%, 1);
+    --prussian-blue: hsla(196, 94%, 13%, 1);
+    --viridian: hsla(155, 15%, 49%, 1);
+    --flame: hsla(17, 83%, 54%, 1);
+    --platinum: hsla(0, 0%, 88%, 1);
+}
+
+body {
+    background-color: var(--floral-white);
+    color: var(--prussian-blue);
+}
+
+.header-logo img {
+    width: 60px;
+    height: 60px;
+}
