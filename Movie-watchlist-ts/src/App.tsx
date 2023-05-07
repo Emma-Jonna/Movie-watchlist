@@ -7,6 +7,7 @@ import axios from "axios";
 import { Top_rated, Result } from "./interface/top rated";
 import Header from "./commponents/header";
 import { FavoriteContextProvider } from "./Context/Favorite";
+import Movie from "./Pages/Movie";
 
 export default function App() {
     let [Favorite, setFavorite] = useState<Result[]>([]);
@@ -44,6 +45,7 @@ export default function App() {
                 <FavoriteContextProvider>
                     <Routes>
                         <Route path="/" element={<Home />} />
+                        <Route path="/movie/:id" element={<Movie />} />
                     </Routes>
                 </FavoriteContextProvider>
             </main>
