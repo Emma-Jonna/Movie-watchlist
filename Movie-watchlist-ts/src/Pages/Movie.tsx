@@ -66,6 +66,7 @@ export default function () {
     return !MovieCard.poster_path ? null : (
         <section>
             <BackButton text={`< Home`} location={`/`} />
+            <MovieCard Film={MovieCard} />
         </section>
     )
 }

@@ -7,6 +7,7 @@ import SearchForm from "../commponents/searchForm";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleLeft, faAngleRight } from "@fortawesome/free-solid-svg-icons";
 import FilmCard from "../commponents/filmCard";
+import top_rated from "../lib/fetch/top_rated";
 
 export default function Home() {
     /* Film state */
@@ -24,15 +25,18 @@ export default function Home() {
         const urlFilms = `https://api.themoviedb.org/3/movie/top_rated?api_key=${import.meta.env.VITE_TMDBv3}`;
 
         /* Fetch the movies */
-        const {
-            data: { results, total_pages },
-        }: { data: Top_rated } = await axios.get(urlFilms, {
-            params: {
-                api_key: import.meta.env.VITE_TMDBv3,
-                page: CurentPage,
-                language: "sv",
-            },
-        });
+        // // const {
+        // //     data: { results, total_pages },
+        // // }: { data: Top_rated } = await axios.get(urlFilms, {
+        // //     params: {
+        // //         api_key: import.meta.env.VITE_TMDBv3,
+        // //         page: CurentPage,
+        // //         language: "sv",
+        // //     },
+        // // });
+        const data = await top_rated(CurentPage);
+        console.log(data);
+        
 
         /* Modefing results  */
         const Star_Wars_A_New_Hope = {
